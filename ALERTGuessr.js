@@ -2,8 +2,8 @@
 // @name         ALERTGuessr
 // @namespace    http://tampermonkey.net/
 // @version      2024-04-28
-// @description  try to take over the world!
-// @author       You
+// @description  try to learn about the world!
+// @author       Kevin Crawford
 // @match        https://alertwest.live/secure/anomalies
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=alertwest.live
 // @run-at       document-start
@@ -31,7 +31,7 @@ To be implemented:
                             $('<span>').attr('id', 'guessrBtnColor').addClass('material-icons').html('power_settings_new')
                         ).on('click', () => {
                             function on(){
-                                $('#guessrBtnColor').attr('style', 'color: green');
+                                $('#guessrBtn').prop('disabled', true);
                                 me.initGuessr();
                             }
                             function off(){
@@ -122,7 +122,7 @@ To be implemented:
                                 'class': 'coordinates-input',
                                 'id': 'coordinates-input',
                                 'placeholder': 'Input guess coordinates',
-                                'style': 'margin-left: 10px; font: 400 11px Roboto, Arial, sans-serif; width: 150.5px; height: 24px'
+                                'style': 'margin-left: 10px; margin-bottom: 1px; font: 400 11px Roboto, Arial, sans-serif; width: 150.5px;'
                             }).on('keyup', (e) => keyupEvent(e)),
                             $('<p>').attr({
                                 'style': 'height: 24px; color: yellow; margin-left: 10px',
@@ -134,6 +134,8 @@ To be implemented:
                             'id': 'gameMap'
                         })
                     ])
+                    $('#guessrBtnColor').attr('style', 'color: green');
+                    $('#guessrBtn').prop('disabled', false);
 
                     latlon = { lat: data.LG[Object.keys(data.LG)[0]].lat, lng: data.LG[Object.keys(data.LG)[0]].lng };
                     console.log('Loaded Streetview');
