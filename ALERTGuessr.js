@@ -26,12 +26,13 @@ To be implemented:
                 $('#next-button').html('Lock Oldest');
                 this._targetNode.append(
                     $('<div>').addClass('row').append([
-                        $('<p>').attr('style', 'margin-right: 50px;').html('ALERTGuessr:'),
-                        $('<button>').attr('id', 'guessrBtn').append(
+                        $('<p>').attr('style', 'margin-right: 50px; margin-top: 2px;').html('ALERTGuessr:'),
+                        $('<button>').attr('id', 'guessrBtn').attr('style', 'border-radius: 50%; padding: 0px; width: 32px; height: 32px;').append(
                             $('<span>').attr('id', 'guessrBtnColor').addClass('material-icons').html('power_settings_new')
                         ).on('click', () => {
                             function on(){
                                 $('#guessrBtn').prop('disabled', true);
+                                $('#guessrBtnColor').attr('style', 'color: grey');
                                 me.initGuessr();
                             }
                             function off(){
