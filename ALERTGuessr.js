@@ -98,7 +98,7 @@ To be implemented:
                 if (status == 'OK') {
 
                     if (loaded) {
-                        latlon = { lat: data.LG[Object.keys(data.LG)[0]].lat, lng: data.LG[Object.keys(data.LG)[0]].lng };
+                        latlon = { lat: data.location.latLng.lat(), lng: data.location.latLng.lng() };
                         $('#guess-result').html('');
                         $('#game-next').html('Next');
                         $('#coordinates-input').val('');
@@ -138,7 +138,7 @@ To be implemented:
                     $('#guessrBtnColor').attr('style', 'color: green');
                     $('#guessrBtn').prop('disabled', false);
 
-                    latlon = { lat: data.LG[Object.keys(data.LG)[0]].lat, lng: data.LG[Object.keys(data.LG)[0]].lng };
+                    latlon = { lat: data.location.latLng.lat(), lng: data.location.latLng.lng() };
                     console.log('Loaded Streetview');
                     loaded = 1;
                     panorama = new google.maps.StreetViewPanorama(
