@@ -122,7 +122,7 @@ To be implemented:
                                 'class': 'coordinates-input',
                                 'id': 'coordinates-input',
                                 'placeholder': 'Input guess coordinates',
-                                'style': 'margin-left: 10px; margin-bottom: 1px; font: 400 11px Roboto, Arial, sans-serif; width: 150.5px;'
+                                'style': 'margin-left: 10px; font: 400 11px Roboto, Arial, sans-serif; width: 150.5px;'
                             }).on('keyup', (e) => keyupEvent(e)),
                             $('<p>').attr({
                                 'style': 'height: 24px; color: yellow; margin-left: 10px',
