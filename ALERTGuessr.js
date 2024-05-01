@@ -60,13 +60,12 @@
             var loaded = 0;
             var latlon = {lat: 0, lng: 0}
             var panorama;
-            var dist = 0;
 
             function keyupEvent(e){
                 if (e.key === 'Enter' || e.keyCode === 13) {
                     var pattern = /((-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[, ]{1,})?){2}|(-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[° ]{1,})[0-9]{1,3}(?:.[0-9]{1,})?[' ]*(?:[0-9]{1,3}(?:.[0-9]{1,})?[&quot; ]{1,})?(?:[NSEWnsew])?[, ]{0,2}){2})/g;
                     if (pattern.test($('.coordinates-input').val())){
-                        dist = haversine(latlon.lat, latlon.lng, parseFloat($('.coordinates-input').val().split(',')[0]), parseFloat($('.coordinates-input').val().split(',')[1]));
+                        var dist = haversine(latlon.lat, latlon.lng, parseFloat($('.coordinates-input').val().split(',')[0]), parseFloat($('.coordinates-input').val().split(',')[1]));
                         $('#guess-result').stop().show(0).html(`Your guess was ${Math.round(dist)} miles away!`);
                         $('[id="pac-input"]').val(`${latlon.lat},${latlon.lng}`).trigger('submit');
                         $('[id="pac-input"]').val('');
@@ -127,7 +126,7 @@
                         $('<div>').attr({
                             'style': 'width: 602px; height: 473px; margin-bottom: 10px',
                             'id': 'gameMap'
-                        }),
+                        })
                     ])
                     $('#guessrBtnColor').attr('style', 'color: green');
                     $('#guessrBtn').prop('disabled', false);
