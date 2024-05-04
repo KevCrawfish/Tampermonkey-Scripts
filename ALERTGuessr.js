@@ -62,7 +62,7 @@
             var panorama;
 
             function keyupEvent(e){
-                if (e.key === 'Enter' || e.keyCode === 13) {
+                if (e.key === 'Enter' || e.keyCode === 13 || e && (e.which == 2 || e.button == 4 )) {
                     var pattern = /((-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[, ]{1,})?){2}|(-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[° ]{1,})[0-9]{1,3}(?:.[0-9]{1,})?[' ]*(?:[0-9]{1,3}(?:.[0-9]{1,})?[&quot; ]{1,})?(?:[NSEWnsew])?[, ]{0,2}){2})/g;
                     if (pattern.test($('.coordinates-input').val())){
                         var dist = haversine(latlon.lat, latlon.lng, parseFloat($('.coordinates-input').val().split(',')[0]), parseFloat($('.coordinates-input').val().split(',')[1]));
@@ -96,7 +96,7 @@
                         $('#game-next').html('Next');
                         $('#coordinates-input').val('');
                         panorama.setPosition(latlon);
-                        $('#coordinates-input').off().on('keyup', (e) => keyupEvent(e));
+                        $('#coordinates-input').off().on('keyup mousedown', (e) => keyupEvent(e));
                         return;
                     }
 
@@ -117,7 +117,7 @@
                                 'id': 'coordinates-input',
                                 'placeholder': 'Input guess coordinates',
                                 'style': 'margin-left: 10px; font: 400 11px Roboto, Arial, sans-serif; width: 150.5px;'
-                            }).on('keyup', (e) => keyupEvent(e)),
+                            }).on('keyup mousedown', (e) => keyupEvent(e)),
                             $('<p>').attr({
                                 'style': 'height: 24px; color: yellow; margin-left: 10px',
                                 'id': 'guess-result'
