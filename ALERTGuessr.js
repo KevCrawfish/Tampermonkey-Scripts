@@ -44,25 +44,25 @@
             }
         };
 
-        function haversine(lat1, lon1, lat2, lon2) {
-            // this function is super rad 😎
-            function toRad(x) {
-                return x * Math.PI / 180;
-            }
-            var r = 6371;
-            var a = 1 - Math.cos(toRad(lat2 - lat1)) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * (1 - Math.cos(toRad(lon2 - lon1)));
-            var c = Math.sqrt(a/2);
-            var d = 2 * r * Math.asin(c);
-            return d * 0.621371;
-        }
-
         this.initGuessr = () => {
             var loaded = 0;
             var latlon = {lat: 0, lng: 0}
             var panorama;
 
+            function haversine(lat1, lon1, lat2, lon2) {
+                // this function is super rad 😎
+                function toRad(x) {
+                    return x * Math.PI / 180;
+                }
+                var r = 6371;
+                var a = 1 - Math.cos(toRad(lat2 - lat1)) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * (1 - Math.cos(toRad(lon2 - lon1)));
+                var c = Math.sqrt(a/2);
+                var d = 2 * r * Math.asin(c);
+                return d * 0.621371;
+            };
+
             function keyupEvent(e){
-                if (e.key === 'Enter' || e.keyCode === 13 || e && (e.which == 2 || e.button == 4 )) {
+                if (e.key === 'Enter' || e.button == 1) {
                     var pattern = /((-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[, ]{1,})?){2}|(-?[0-9]{1,3}(?:.[0-9]{1,})?(?:[° ]{1,})[0-9]{1,3}(?:.[0-9]{1,})?[' ]*(?:[0-9]{1,3}(?:.[0-9]{1,})?[&quot; ]{1,})?(?:[NSEWnsew])?[, ]{0,2}){2})/g;
                     if (pattern.test($('.coordinates-input').val())){
                         var dist = haversine(latlon.lat, latlon.lng, parseFloat($('.coordinates-input').val().split(',')[0]), parseFloat($('.coordinates-input').val().split(',')[1]));
