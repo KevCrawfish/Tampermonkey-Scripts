@@ -89,17 +89,14 @@
             }
 
             function HandleCallback(data, status) {
-                if (status == 'OK') {
-                    if (loaded) {
-                        latlon = { lat: data.location.latLng.lat(), lng: data.location.latLng.lng() };
-                        $('#guess-result').html('');
-                        $('#game-next').html('Next');
-                        $('#coordinates-input').val('');
-                        panorama.setPosition(latlon);
-                        $('#coordinates-input').off().on('keyup mousedown', (e) => keyupEvent(e));
-                        return;
-                    }
-
+                if (status == 'OK' && loaded) {
+                    latlon = { lat: data.location.latLng.lat(), lng: data.location.latLng.lng() };
+                    $('#guess-result').html('');
+                    $('#game-next').html('Next');
+                    $('#coordinates-input').val('');
+                    panorama.setPosition(latlon);
+                    $('#coordinates-input').off().on('keyup mousedown', (e) => keyupEvent(e));
+                } else if (status == 'OK' && !loaded) {
                     $('div#fire-feed').prepend([
                         $('<div>').attr({
                             'style': 'width: 602px; height: 24px; margin-bottom: 10px; margin-top: 10px; display: flex',
@@ -132,8 +129,6 @@
                     $('#guessrBtn').prop('disabled', false);
 
                     latlon = { lat: data.location.latLng.lat(), lng: data.location.latLng.lng() };
-                    console.log('Loaded Streetview');
-                    loaded = 1;
                     panorama = new google.maps.StreetViewPanorama(
                         document.getElementById("gameMap"),
                         {
@@ -156,8 +151,10 @@
                             $('#gameMap > div > div:nth-child(14)').wrap("<div class='new' style='pointer-events: none'></div>");
                         }
                     }, 100);
+
+                    loaded = 1;
+                    console.log('Loaded Streetview');
                 } else {
-                    // Nothing here! Let's try another location.
                     TryRandomLocation(HandleCallback);
                 }
             }
