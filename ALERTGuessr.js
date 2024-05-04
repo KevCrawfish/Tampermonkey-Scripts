@@ -2,7 +2,7 @@
 // @name         ALERTGuessr
 // @namespace    http://tampermonkey.net/
 // @version      2024-04-28
-// @description  try to learn about the world!
+// @description  Try to learn about the world!
 // @author       Kevin Crawford
 // @match        https://alertwest.live/secure/anomalies
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=alertwest.live
